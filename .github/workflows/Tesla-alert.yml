@@ -1,0 +1,22 @@
+name: Tesla Telegram Alert
+
+on:
+  schedule:
+    - cron: "30 13 * * 1-5"   # 9:30 AM ET is 13:30 UTC during EDT
+  workflow_dispatch: {}        # lets you run it manually for a test
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install yfinance requests
+      - name: Run script
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python tsla_telegram.py
