@@ -3,9 +3,9 @@ import yfinance as yf
 from datetime import datetime
 import pytz
 
-# Your Telegram bot credentials
-BOT_TOKEN = "PUT-YOUR-BOT-TOKEN-HERE"
-CHAT_ID = "PUT-YOUR-CHAT-ID-HERE"
+import os
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+CHAT_ID = os.environ["CHAT_ID"]
 
 def get_tesla_data():
     tsla = yf.Ticker("TSLA")
